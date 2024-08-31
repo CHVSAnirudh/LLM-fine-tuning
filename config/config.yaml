@@ -1,0 +1,48 @@
+# Model configuation
+BASE_MODEL: "NousResearch/Meta-Llama-3-8B-Instruct"
+NEW_MODEL: "query-skill"
+
+# Data configuation
+DATASET_PATH: "chvsanirudh/query-skill-requirements"
+USE_HF: True
+
+
+# LoRA Configurations
+USE_LORA: True
+USE_DORA: True
+LORA_R: 8
+LORA_ALPHA: 32
+LORA_DROPOUT: 0.1
+LORA_BIAS: "none"
+LORA_TASK_TYPE: "CAUSAL_LM"
+LORA_TARGET_MODULES: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj", "lora_magnitude_vector"]
+
+# Training configuation
+NUM_EPOCHS: 1
+BATCH_SIZE: 8
+use_bf16: True
+use_4bit_bnb: False
+LEARNING_RATE: 2.0e-4
+
+GRAD_ACCUMULATION_STEPS: 2 # effective backprop @ batch_size*grad_accum_steps
+GRADIENT_CHECKPOINTING: True # speed down by ~20%, improves mem. efficiency
+
+OPTIMIZER: "adamw_torch" # examples include ["adamw_hf", "adamw", "sgd"]
+WEIGHT_DECAY: 0.1
+LR_SCHEDULER_TYPE: "cosine"
+MAX_GRAD_NORM: 1 # Clip gradients after the value
+WARMUP_RATIO: 0.1 # The lr takes 3% steps to reach stability
+
+PACKING: False
+MAX_SEQ_LENGTH: 1024
+
+# Model saving strategy
+SAVE_STRATEGY: "steps"
+SAVE_STEPS: 10
+SAVE_TOTAL_LIMIT: 5
+LOAD_BEST_MODEL_AT_END: True
+
+# Wandb logging
+USE_WANDB: False
+REPORT_TO: "wandb"
+LOGGING_STEPS: 1

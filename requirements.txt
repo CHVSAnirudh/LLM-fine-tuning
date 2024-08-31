@@ -1,0 +1,17 @@
+dataclasses
+datasets
+transformers
+trl
+accelerate
+awscli
+peft
+scipy
+bitsandbytes
+deepspeed
+
+rich
+asgi-correlation-id
+python-dotenv
+flash-attn
+
+#pip install flash-attn --no-build-isolation
